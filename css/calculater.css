@@ -1,0 +1,13 @@
+.calculater {
+    align-self: center
+}
+table {
+    margin: auto;
+}
+input[type="button"] 
+{ 
+    background-color:lightgreen; 
+    color: black; 
+    border: solid black 2px; 
+    width:100% 
+}

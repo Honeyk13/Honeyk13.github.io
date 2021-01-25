@@ -12,11 +12,17 @@ function show(val) {
 }
 
 function calculate() {
-    let exp = document.getElementById("result").value;
-    let solution = eval(exp);
-    document.getElementById("result").value = solution;
-    document.getElementById("result").focus();
-    // document.getElementById("result").select();
+    try {
+        let exp = document.getElementById("result").value;
+        let solution = eval(exp);
+        document.getElementById("result").value = solution;
+        document.getElementById("result").focus();
+        // document.getElementById("result").select();
+    } catch (err) {
+        alert("Invalid Expression : "+err);
+        clr();
+    }
+    
 }
 var input = document.getElementById("result");
 addEventListener("keyup", function(event) {

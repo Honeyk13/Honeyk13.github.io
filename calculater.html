@@ -5,38 +5,36 @@
         <script src="js/calculater.js"></script>
     </head>
     <body>
-        <div class="calculater">
-            <table border="1">
-                <tr>
-                    <td colspan="3"><input type="text" id = "result"/></td>
-                    <td><input type="button" value="C" onclick="clr()"/></td>
-                </tr>
-                <tr>
-                    <td><input type="button" value="1" onclick="show('1');"></td>
-                    <td><input type="button" value="2" onclick="show('2');"></td>
-                    <td><input type="button" value="3" onclick="show('3');"></td>
-                    <td><input type="button" value="/" onclick="show('/');"></td>
-                </tr>
-                <tr>
-                    <td><input type="button" value="4" onclick="show('4');"></td>
-                    <td><input type="button" value="5" onclick="show('5');"></td>
-                    <td><input type="button" value="6" onclick="show('6');"></td>
-                    <td><input type="button" value="-" onclick="show('-');"></td>
-                </tr>
-                <tr>
-                    <td><input type="button" value="7" onclick="show('7');"></td>
-                    <td><input type="button" value="8" onclick="show('8');"></td>
-                    <td><input type="button" value="9" onclick="show('9');"></td>
-                    <td><input type="button" value="+" onclick="show('+');"></td>
-                </tr>
-                <tr>
-                    <td><input type="button" value="." onclick="show('.');"></td>
-                    <td><input type="button" value="0" onclick="show('0');"></td>
-                    <td><input type="button" value="=" onclick="calculate();"></td>
-                    <td><input type="button" value="*" onclick="show('*');"></td>
-                </tr>
-                
-            </table>
+        <div class="calc-screen">
+            <div class="calc">
+                <div class="main-calc">
+                    <div id= "results">
+                        <input type="text" id = "result"/>
+                    </div>
+                    <div id="keyboard" class="keys">
+                        <button class="operator" id="clear" onclick="clr();">C</button>
+                        <button class="operator" id="cleare">CE</button>
+                        <button class="operator" id="%" value="%" onclick="show('%');">%</button>
+                        <button class="operator" id="+" value="+" onclick="show('+');">+</button>
+                        <button class="number" id="7" value="7" onclick="show('7');">7</button>
+                        <button class="number" id="8" value="8" onclick="show('8');">8</button>
+                        <button class="number" id="9" value="9" onclick="show('9');">9</button>
+                        <button class="operator" id="*" value="*" onclick="show('*');">*</button>
+                        <button class="number" id="4" value="4" onclick="show('4');">4</button>
+                        <button class="number" id="5" value="5" onclick="show('5');">5</button>
+                        <button class="number" id="6" value="6" onclick="show('6');">6</button>
+                        <button class="operator" id="-" value="-" onclick="show('-');">-</button>
+                        <button class="number" id="1" value="1" onclick="show('1');">1</button>
+                        <button class="number" id="2" value="2" onclick="show('2');">2</button>
+                        <button class="number" id="3" value="3" onclick="show('3');">3</button>
+                        <button class="operator" id="/" value="/" onclick="show('/');">/</button>
+                        <button class="empty" id="empty">0</button>
+                        <button class="number" id="0" value="0" onclick="show('0');">0</button>
+                        <button class="number" id="empty">.</button>
+                        <button class="operator" id="clear">=</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <script>document.getElementById("result").focus();</script>
     </body>

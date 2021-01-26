@@ -1,18 +1,21 @@
 .header {
+    width: 100%;
+    height: 100%;
     padding: 2px;
     text-align: center;
     background: #1abc9c;
     color: white;
     font-size: 30px;
+    background-image: url("../images/index.jpg");
 }
 .button {
-    background-color: mediumspringgreen;
+    background-color:gray;
     border: none;
-    color:darkblue;
-    padding: 15px 32px;
+    color:yellow;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 30px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    font-family: cursive;
+
 }

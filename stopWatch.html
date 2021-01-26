@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Welcome</title>
+        <link rel="stylesheet" href="css/clock.css">
+        <script src="js/stopWatch.js"></script>
+    </head>
+    <body>
+        <div class="header" id="header">
+            <button class="button" id="stopWatch" value="clock" onclick=" location.href = 'clock.html';">Clock</button>
+            <button class="button" id="button" value="dark" onclick="changeMode();">Dark</button>
+            <div>
+                <div class="clock" id="clock">
+                    00:00:00
+                </div>
+                <button class="button" id="start" value="start" onclick="start();">Start</button>
+                <button class="button" id="end" value="end" onclick="end();" style="display: none">End</button>
+                <button class="button" id="reset" value="reset" onclick="reset();">Reset</button>
+            </div>
+                       
+        </div>
+    </body>
+</html>

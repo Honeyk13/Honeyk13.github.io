@@ -8,14 +8,20 @@
     font-size: 30px;
     background-image: url("../images/index.jpg");
 }
-.button {
+.button, .button1 {
     background-color:gray;
     border: none;
-    color:yellow;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 30px;
     font-family: cursive;
 
+}
+.button {
+    color: yellow;
+}
+
+.button1 {
+    color: aqua;
 }

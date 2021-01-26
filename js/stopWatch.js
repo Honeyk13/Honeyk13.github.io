@@ -30,29 +30,60 @@ function changeMode(){
     }
 }
 
-setInterval(digital, 1000); 
-function digital() { 
-    let time = new Date(); 
-    let hour = time.getHours(); 
-    let min = time.getMinutes(); 
-    let sec = time.getSeconds(); 
-    am_pm = "AM"; 
-  
-    if (hour > 12) { 
-        hour -= 12; 
-        am_pm = "PM"; 
-    } 
-    if (hour == 0) { 
-        hr = 12; 
-        am_pm = "AM"; 
-    } 
-  
-    hour = hour < 10 ? "0" + hour : hour; 
-    min = min < 10 ? "0" + min : min; 
-    sec = sec < 10 ? "0" + sec : sec; 
-  
-    let currentTime = hour + ":" 
-            + min + ":" + sec + " "+ am_pm; 
-  
-    document.getElementById("clock").innerHTML = currentTime; 
-} 
+var timeElapsedSec = 0;
+var timeElapsedMin = 0;
+var timeElapsedHrs = 0;
+var myTimer = 0;
+var s = "";
+function start() {
+    if(document.getElementById("start").style.display != "none") {
+        document.getElementById("start").style.display = "none";
+        document.getElementById("end").style.display = "inline";
+    }
+    myTimer = setInterval(function() {
+        s="";
+        timeElapsedSec += 1;
+        if(timeElapsedHrs < 10) {
+            s += "0";
+            s +=timeElapsedHrs;
+            s += ":"
+        } else {
+            s +=timeElapsedHrs;
+            s += ":"
+        }
+        if(timeElapsedMin < 10) {
+            s += "0";
+            s +=timeElapsedMin;
+            s += ":"
+        } else {
+            s +=timeElapsedMin;
+            s += ":"
+        }
+        if(timeElapsedSec < 10) {
+            s += "0";
+            s +=timeElapsedSec;
+        } else {
+            s +=timeElapsedSec;
+        }
+        document.getElementById("clock").innerText = s;
+        if(timeElapsedSec == 60) {
+        timeElapsedMin += 1;
+        timeElapsedSec = 0;
+        }
+        if(timeElapsedMin == 60) {
+            timeElapsedHrs += 1;
+            timeElapsedMin = 0;
+        }
+    }, 1000) ;
+}
+
+function end() {
+    clearInterval(myTimer);
+    document.getElementById("clock").innerText = s;
+    document.getElementById("start").style.display = "inline";
+    document.getElementById("end").style.display = "none";
+}
+
+function reset() {
+    location.reload();
+}

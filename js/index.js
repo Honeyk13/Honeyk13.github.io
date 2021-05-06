@@ -10,6 +10,7 @@ function slot(){
         setTimeout(function run() {
             var date = new Date();
             var dateStr = GetFormattedDate(date);
+            document.getElementById('table').innerHTML = "";
             runSchedule(date, pin, age);
             // console.log(dateStr)
             setTimeout(run, 20000);
@@ -64,33 +65,38 @@ function formatResult(data, age) {
         for(var i = 0;i<dateData.length ;i++){
             centerData = dateData[i];
             if('sessions' in centerData){
-                sessionData = centerData['sessions'][0];
-                // if('available_capacity' in sessionData){ 
-                    cap = sessionData['available_capacity'];
-                    if(cap !=0 && sessionData['min_age_limit'] == '45' && age >= 45){
-                        console.log(centerData['center_id'] + centerData['name'] + centerData['district_name'] + cap + sessionData['min_age_limit']);
-                        // alert(centerData['center_id']);
-                        // break;
-                        // while(true){
-                            play();
-                        // }
-                        
-                    } else if(cap !=0 && age < 45 && age > 18) {
-                        console.log(centerData['center_id'] + centerData['name'] + centerData['district_name'] + cap + sessionData['min_age_limit']);
-                        // alert(centerData['center_id']);
-                        // break;
-                        // while(true){
-                            play();
-                        // }
-                    }
-                    // console.log(cap);
-                // }
+                sessionData = centerData['sessions'][0]; 
+                cap = sessionData['available_capacity'];
+                if(cap !=0 && sessionData['min_age_limit'] == '45' && age >= 45){
+                    addInTable(d, centerData['center_id'], centerData['name'], centerData['district_name'], cap)
+                    console.log(centerData['center_id'] + centerData['name'] + centerData['district_name'] + cap + sessionData['min_age_limit']);
+                    play();    
+                } else if(cap !=0 && age < 45 && age > 18 && sessionData['min_age_limit'] != '45') {
+                    addInTable(d, centerData['center_id'], centerData['name'], centerData['district_name'],cap)
+                    console.log(centerData['center_id'] + centerData['name'] + centerData['district_name'] + cap + sessionData['min_age_limit']);
+                    play();
+                } 
             }
         }
     }
 }
 
+function addInTable(date, center_id, center_name, district, cap) {
+    var s = "<tr>";
+    s += '<td class="px-4 py-3">' + date + '</td>';
+    s += '<td class="px-4 py-3">' + center_id + '</td>';
+    s += '<td class="px-4 py-3">' + center_name + '</td>';
+    s += '<td class="px-4 py-3">' + district + '</td>';
+    s += '<td class="px-4 py-3">' + cap + '</td>';
+    s += '</tr>';
+    document.getElementById('table').innerHTML += s;
+}
+
 function play() { 
     var beepsound = new Audio('https://www.soundjay.com/button/sounds/beep-01a.mp3'); 
     beepsound.play(); 
+}
+
+function goToCowin() {
+    location.replace("https://www.cowin.gov.in/home")
 }

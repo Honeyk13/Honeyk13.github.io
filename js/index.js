@@ -1,6 +1,11 @@
 var resultData;
 
 function slot(){
+    document.getElementById('click').innerHTML = "Running..."
+    document.getElementById('click').disabled = true;
+    document.getElementById('message').innerHTML = "! It Will Ring once any slot available please don't close browser and tab !"
+    document.getElementById('message').style.color = "Red";
+
     var pin = document.getElementById('pin').value;
     var age = document.getElementById('age').value;
     if(pin.length == 0){
@@ -70,7 +75,7 @@ function formatResult(data, age) {
                 if(cap !=0 && sessionData['min_age_limit'] == '45' && age >= 45){
                     addInTable(d, centerData['center_id'], centerData['name'], centerData['district_name'], cap)
                     console.log(centerData['center_id'] + centerData['name'] + centerData['district_name'] + cap + sessionData['min_age_limit']);
-                    play();    
+                    play();
                 } else if(cap !=0 && age < 45 && age > 18 && sessionData['min_age_limit'] != '45') {
                     addInTable(d, centerData['center_id'], centerData['name'], centerData['district_name'],cap)
                     console.log(centerData['center_id'] + centerData['name'] + centerData['district_name'] + cap + sessionData['min_age_limit']);

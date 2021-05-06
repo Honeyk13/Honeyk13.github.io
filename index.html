@@ -1,90 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <title>CoWinSlotCheck</title>
-</head>
-<script src="js/index.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+var resultData;
 
+function slot(){
+    document.getElementById('click').innerHTML = "Running..."
+    document.getElementById('click').disabled = true;
+    document.getElementById('message').innerHTML = "! It Will Ring once any slot available please don't close browser and tab !"
+    document.getElementById('message').style.color = "Red";
 
-<body>
-    <header class="text-gray-600 body-font">
-        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-          <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            </svg>
-            <span class="ml-3 text-xl">SlotCheck</span>
-          </a>
-          <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-            <a class="mr-5 hover:text-gray-900">Home</a>
-            <a class="mr-5 hover:text-gray-900">About</a>
-            <a class="mr-5 hover:text-gray-900">Services</a>
-            <a class="mr-5 hover:text-gray-900">Contact</a>
-          </nav>
-          <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Button
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </button>
-        </div>
-      </header>
-    <section class="text-gray-600 body-font">
-    <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
-        <div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
-        <h1 class="title-font font-medium text-3xl text-gray-900"></h1>
-        <p class="leading-relaxed mt-4">Just enter your age and pin code of city/area, we will remind you once vaccine available. please don't close the tab or refresh the page.</p>
-        </div>
-        <div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
-        <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Check Slot</h2>
-        <div class="relative mb-4">
-            <label for="age" class="leading-7 text-sm text-gray-600">Your Age</label>
-            <input type="text" id="age" name="age" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-        </div>
-        <div class="relative mb-4">
-            <label for="pin" class="leading-7 text-sm text-gray-600">PIN</label>
-            <input type="text" id="pin" name="pin" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-        </div>
-        
-        <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" onclick="slot()">Click</button>
-        <p class="text-xs text-gray-500 mt-3">Check from today to upcoming 5 days</p>
-        </div>
-    </div>
-    </section>
+    var pin = document.getElementById('pin').value;
+    var age = document.getElementById('age').value;
+    if(pin.length == 0){
+        alert("Please enter valid PIN")
+    } else {
+        let i = 1;
+        setTimeout(function run() {
+            var date = new Date();
+            var dateStr = GetFormattedDate(date);
+            document.getElementById('table').innerHTML = "";
+            runSchedule(date, pin, age);
+            // console.log(dateStr)
+            setTimeout(run, 20000);
+        }, 100);
+    }
+}
 
+function GetFormattedDate(todayTime) {
+    var month = format(todayTime.getMonth() + 1);
+    var day = format(todayTime.getDate());
+    var year = format(todayTime.getFullYear());
+    return day + "-" + month + "-" + year;
+}
 
-    <section class="text-gray-600 body-font">
-    <div class="container px-5 py-24 mx-auto">
-        <div class="flex flex-col text-center w-full mb-20">
-        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Slots</h1>
-        <p class="lg:w-2/3 mx-auto leading-relaxed text-base"></p>
-        </div>
-        <div class="lg:w-2/3 w-full mx-auto overflow-auto">
-        <table class="table-auto w-full text-left whitespace-no-wrap">
-            <thead>
-            <tr>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Date</th>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">Center ID</th>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Center Name</th>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">District</th>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Available Capacity</th>
-            </tr>
-            </thead>
-            <tbody id="table">
-            </tbody>
-        </table>
-        </div>
-        <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
-        
-        <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" onclick="goToCowin()">Book Slot</button>
-        </div>
-    </div>
-    </section>
+function format(val) {
+    val = val.toString();
+    if(val.length == 1){
+        return '0' + val;
+    } else {
+        return val;
+    }
+}
 
-</body>
-</html>
+function runSchedule(date, pin, age){
+    resultData = {};
+    // curDate = date;
+    for(var i=0; i<5;i++) {
+        var dateStr = GetFormattedDate(date)
+        getData(dateStr, pin, age);
+        date = addDays(date, 1);    
+    }
+    
+}
+
+function addDays(theDate, days) {
+    return new Date(theDate.getTime() + days*24*60*60*1000);
+}
+
+function getData(dateStr, pin, age) {
+        var request = new XMLHttpRequest();
+        request.open('GET', 'https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=' + pin + '&date=' +  dateStr, true)
+        request.send();
+        request.onreadystatechange = (e) =>{
+        resultData[dateStr] = jQuery.parseJSON(request.responseText);
+        formatResult(resultData, age);
+    }
+}
+
+function formatResult(data, age) {
+    for(var d in data){
+        dateData = data[d]['centers'];
+        for(var i = 0;i<dateData.length ;i++){
+            centerData = dateData[i];
+            if('sessions' in centerData){
+                sessionData = centerData['sessions'][0]; 
+                cap = sessionData['available_capacity'];
+                if(cap !=0 && sessionData['min_age_limit'] == '45' && age >= 45){
+                    addInTable(d, centerData['center_id'], centerData['name'], centerData['district_name'], cap)
+                    console.log(centerData['center_id'] + centerData['name'] + centerData['district_name'] + cap + sessionData['min_age_limit']);
+                    play();
+                } else if(cap !=0 && age < 45 && age > 18 && sessionData['min_age_limit'] != '45') {
+                    addInTable(d, centerData['center_id'], centerData['name'], centerData['district_name'],cap)
+                    console.log(centerData['center_id'] + centerData['name'] + centerData['district_name'] + cap + sessionData['min_age_limit']);
+                    play();
+                } 
+            }
+        }
+    }
+}
+
+function addInTable(date, center_id, center_name, district, cap) {
+    var s = "<tr>";
+    s += '<td class="px-4 py-3">' + date + '</td>';
+    s += '<td class="px-4 py-3">' + center_id + '</td>';
+    s += '<td class="px-4 py-3">' + center_name + '</td>';
+    s += '<td class="px-4 py-3">' + district + '</td>';
+    s += '<td class="px-4 py-3">' + cap + '</td>';
+    s += '</tr>';
+    document.getElementById('table').innerHTML += s;
+}
+
+function play() { 
+    var beepsound = new Audio('https://www.soundjay.com/button/sounds/beep-01a.mp3'); 
+    beepsound.play(); 
+}
+
+function goToCowin() {
+    location.replace("https://www.cowin.gov.in/home")
+}

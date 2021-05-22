@@ -16,9 +16,10 @@
     <header class="text-gray-600 body-font">
         <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
           <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            </svg>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24"> -->
+              <!-- <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path> -->
+              <img src="images/7e5a6b981f0d41d6b07e44afe5d1e568.png" alt="Girl in a jacket" width="50" height="60">
+            <!-- </svg> -->
             <span class="ml-3 text-xl">SlotCheck</span>
           </a>
           <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
@@ -50,7 +51,13 @@
             <label for="pin" class="leading-7 text-sm text-gray-600">PIN</label>
             <input type="text" id="pin" name="pin" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
         </div>
-        
+
+        <div class="flex flex-col">
+            <label class="leading-7 text-sm text-gray-700">
+                <input type="checkbox" id="dose2" class="form-checkbox h-5 w-5 text-indigo-700" ><span class="ml-2 text-gray-700">DOSE 2</span>
+            </label>
+        </div>
+
         <button id = "click" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" onclick="slot()">Click</button>
         <p id = "message" class="text-xs text-gray-500 mt-3"></p>
         <p class="text-xs text-gray-500 mt-3">Check from today to upcoming 15 days</p>

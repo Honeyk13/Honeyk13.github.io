@@ -1,18 +1,20 @@
 var resultData;
+var slot2;
 
-function slot(){
-    document.getElementById('click').innerHTML = "Running..."
-    document.getElementById('click').disabled = true;
-    document.getElementById('message').innerHTML = "! It Will Ring once any slot available please don't close browser and tab !"
-    document.getElementById('message').style.color = "Red";
-
+function slot() {
     var pin = document.getElementById('pin').value;
     var age = document.getElementById('age').value;
+    slot2 = document.getElementById('dose2').checked;
+    console.log(slot2);
     if(pin.length == 0){
         alert("Please enter valid PIN")
     } else {
         let i = 1;
         setTimeout(function run() {
+            document.getElementById('click').innerHTML = "Running..."
+            document.getElementById('click').disabled = true;
+            document.getElementById('message').innerHTML = "! It Will Ring once any slot available please don't close browser and tab !"
+            document.getElementById('message').style.color = "Red";
             var date = new Date();
             var dateStr = GetFormattedDate(date);
             document.getElementById('table').innerHTML = "";
@@ -72,6 +74,9 @@ function formatResult(data, age) {
             if('sessions' in centerData){
                 sessionData = centerData['sessions'][0]; 
                 cap = sessionData['available_capacity'];
+                if(slot2 == true) {
+                    cap = sessionData['available_capacity_dose2'];
+                }
                 if(cap !=0 && sessionData['min_age_limit'] == '45' && age >= 45){
                     addInTable(d, centerData['center_id'], centerData['name'], centerData['district_name'], cap)
                     console.log(centerData['center_id'] + centerData['name'] + centerData['district_name'] + cap + sessionData['min_age_limit']);

@@ -98,7 +98,7 @@ function addInTable(date, center_id, center_name, district, cap) {
 }
 
 function play() { 
-    var beepsound = new Audio('https://www.soundjay.com/button/sounds/beep-01a.mp3'); 
+    var beepsound = new Audio('https://www.soundjay.com/buttons/sounds/beep-01a.mp3'); 
     beepsound.play(); 
 }
 

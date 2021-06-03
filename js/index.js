@@ -61,7 +61,10 @@ function getData(dateStr, pin, age) {
         request.open('GET', 'https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=' + pin + '&date=' +  dateStr, true)
         request.send();
         request.onreadystatechange = (e) =>{
-        resultData[dateStr] = jQuery.parseJSON(request.responseText);
+        console.log(request.responseText);
+        if(request.responseText.length > 0){
+            resultData[dateStr] = JSON.parse(request.responseText);
+        }
         formatResult(resultData, age);
     }
 }
@@ -77,13 +80,13 @@ function formatResult(data, age) {
                 if(slot2 == true) {
                     cap = sessionData['available_capacity_dose2'];
                 }
-                if(cap !=0 && sessionData['min_age_limit'] == '45' && age >= 45){
+                if(cap != 0 && sessionData['min_age_limit'] == '45' && age >= 45){
                     addInTable(d, centerData['center_id'], centerData['name'], centerData['district_name'], cap)
-                    console.log(centerData['center_id'] + centerData['name'] + centerData['district_name'] + cap + sessionData['min_age_limit']);
+                    // console.log(centerData['center_id'] + centerData['name'] + centerData['district_name'] + cap + sessionData['min_age_limit']);
                     play();
-                } else if(cap !=0 && age < 45 && age > 18 && sessionData['min_age_limit'] != '45') {
+                } else if(cap != 0 && age < 45 && age > 18 && sessionData['min_age_limit'] != '45') {
                     addInTable(d, centerData['center_id'], centerData['name'], centerData['district_name'],cap)
-                    console.log(centerData['center_id'] + centerData['name'] + centerData['district_name'] + cap + sessionData['min_age_limit']);
+                    // console.log(centerData['center_id'] + centerData['name'] + centerData['district_name'] + cap + sessionData['min_age_limit']);
                     play();
                 } 
             }
@@ -103,7 +106,7 @@ function addInTable(date, center_id, center_name, district, cap) {
 }
 
 function play() { 
-    var beepsound = new Audio("sound/beep-04.mp3"); 
+    var beepsound = new Audio("sound/beep-04.mp3");//'https://www.soundjay.com/buttons/sounds/beep-01a.mp3'); 
     beepsound.play(); 
 }
 

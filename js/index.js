@@ -44,7 +44,7 @@ function format(val) {
 function runSchedule(date, pin, age){
     resultData = {};
     // curDate = date;
-    for(var i=0; i<15;i++) {
+    for(var i=0; i<5;i++) {
         var dateStr = GetFormattedDate(date)
         getData(dateStr, pin, age);
         date = addDays(date, 1);    
